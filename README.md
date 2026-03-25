@@ -1,6 +1,6 @@
 # Portfolio 2nd-Semester
 
-#Explanations
+Explanations
 
 1. Overview
 This portfolio is a digital showcase of my work, highlighting my journey in interactive media and design. It features key sections that reflect both my creative and technical development:
