@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - Katerina Borisova</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&family=Sofia+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/about.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="left-image">
+      <img src="pics/me.jpg" alt="Katerina Borisova" />
+    </div>
+
+    <div class="right-content">
+      <div class="top-header">
+        <h1>About Me</h1>
+      </div>
+
+      <p class="paragraph">
+        I am Katerina Borisova, 19 years old and I am currently a student in Fontys University.<br>
+        I am studying Information and Communication Technologies and Media.
+      </p>
+
+      <!---Script changer-->
+      <div class="tabs">
+        <span onclick="showContent('education')">Education</span>
+        <span onclick="showContent('skills')">Skills</span>
+        <span onclick="showContent('experience')">Experience</span>
+      </div>
+
+      <div class="info" id="education">
+        <ul>
+          <li>Learning Informatics – the C# language</li>
+          <li>Learning Advanced Information Technology – Data processing and analysis in Microsoft Access, Multimedia (bitmap/vector graphics, video processing)</li>
+          <li>Learning Advanced Math – Mathematical analysis and Geometry</li>
+        </ul>
+      </div>
+
+      <div class="info" id="skills" style="display:none">
+        <ul>
+          <li>Programming: C#, HTML, CSS, JavaScript</li>
+          <li>Design: Canva, Figma, UI Design</li>
+          <li>Problem-solving and analytical thinking</li>
+        </ul>
+      </div>
+
+      <div class="info" id="experience" style="display:none">
+        <ul>
+          <li>Participated in university projects focused on user interfaces</li>
+          <li>Group projects using agile teamwork</li>
+          <li>Personal blog and portfolio development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showContent(sectionId) {
+      const sections = document.querySelectorAll('.info');
+      sections.forEach(section => {
+        section.style.display = section.id === sectionId ? 'block' : 'none';
+      });
+    }
+  </script>
+
+
+</body>
+</html>

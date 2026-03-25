@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Portfolio</title>
+  <link rel="stylesheet" href="assets/index.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="nav">
+    <span class="portfolio"><b>Portfolio</b></span>
+    <span class="name">Katerina Borisova</span>
+    <a href="LO.html"><span class="learning-outcomes">Learning Outcomes</span></a>
+    <a href="about.html"><span class="about">About Me</span></a>
+    <span class="contact" onclick="openModal()">Contact</span> 
+  </div>
+
+  <!-- Cylinder script -->
+  <script>
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 100);
+    camera.position.set(0, 5, 10);
+    camera.lookAt(0, 0, 0);
+
+    const scene = new THREE.Scene();
+    const geometry = new THREE.PlaneGeometry(3.56, 4.985);
+
+    // Image textures and page links
+    const loader = new THREE.TextureLoader();
+    const imagePaths = [
+      'pics/UXdesign.png',
+      'pics/Project1.png',
+      'pics/development.png',
+      'pics/Project1.png',
+      'pics/UXdesign.png',
+      'pics/ProjectX.png',
+      'pics/development.png',
+      'pics/projectX.png'
+    ];
+
+    const pageLinks = [
+      'UX.html',
+      'Branding.html',
+      'Development.html',
+      'Branding.html',
+      'UX.html',
+      'ProjectX.html',
+      'Development.html',
+      'ProjectX.html'
+    ];
+
+    const radius = 6;
+    const cylinderGroup = new THREE.Group();
+    const planes = [];
+
+    for (let i = 0; i < imagePaths.length; i++) {
+      const texture = loader.load(imagePaths[i]);
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.DoubleSide
+      });
+
+      const plane = new THREE.Mesh(geometry, material);
+      const angle = (i / imagePaths.length) * Math.PI * 2;
+      plane.position.set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
+      plane.lookAt(0, 0, 0);
+      plane.userData = { link: pageLinks[i] };
+      cylinderGroup.add(plane);
+      planes.push(plane);
+    }
+
+    cylinderGroup.position.y = 1.1;
+    scene.add(cylinderGroup);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    document.body.appendChild(renderer.domElement);
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    let rotationSpeed = 0;
+    window.addEventListener('wheel', (event) => {
+      rotationSpeed += event.deltaY * 0.00007;
+    });
+
+    let touchStartX = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      const dx = e.touches[0].clientX - touchStartX;
+      touchStartX = e.touches[0].clientX;
+      rotationSpeed += dx * 0.003;
+    });
+
+    window.addEventListener('click', (event) => {
+      mouse.x = (event.clientX / width) * 2 - 1;
+      mouse.y = -(event.clientY / height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(planes);
+      if (intersects.length > 0 && intersects[0].object.userData.link) {
+        window.open(intersects[0].object.userData.link, "_blank");
+      }
+    });
+
+    let hoverItem = null;
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = (event.clientX / width) * 2 - 1;
+      mouse.y = -(event.clientY / height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(planes);
+      if (intersects.length > 0) {
+        if (!hoverItem) {
+          hoverItem = intersects[0].object;
+          gsap.to(hoverItem.scale, { x: 1.5, y: 1.5, z: 1.5 });
+        }
+      } else {
+        if (hoverItem) {
+          gsap.to(hoverItem.scale, { x: 1.0, y: 1.0, z: 1.0 });
+          hoverItem = null;
+        }
+      }
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (Math.abs(rotationSpeed) > 0.00005) {
+        cylinderGroup.rotation.y += rotationSpeed;
+        rotationSpeed *= 0.95;
+      } else {
+        rotationSpeed = 0;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+
+  <!-- Contact Form -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Contacts</h2>
+      <p class="emails">
+        <a href="https://www.instagram.com/katerina_borisova___/?hl=en"><i class="uil uil-instagram"></i> katerina_borisova<br></a>
+        <a href="https://www.facebook.com/profile.php?id=100086846344732"><i class="uil uil-facebook"></i> Katerina Borisova<br></a>
+        <a href="mailto:katerina.borisova294@gmail.com"><i class="uil uil-envelope"></i> katerina.borisova294@gmail.com<br></a>
+        <a href="mailto:549093@student.fontys.nl"><i class="uil uil-envelopes"></i> 549093@student.fontys.nl</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Contact Modal Script -->
+  <script>
+    function openModal() {
+      document.getElementById("contactModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("contactModal").style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+@font-face{
+  font-family: 'Solare';
+  src:url(/fonts/solare/solare/SolareItalic-Black.otf) format('opentype')
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('/pics/background.png'); 
+    background-size: cover;
+    background-position: center;
+    font-family: 'Solare';
+    color: #834550;
+  }
+
+  .nav {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .nav span {
+    position: absolute;
+    font-style: italic;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .nav span:hover {
+    color: black;
+  }
+
+  .portfolio {
+    top: 15px;
+    left: 20px;
+    font-size: 3rem;
+    font-style: italic;
+
+  }
+
+  .name {
+    top: 75px;
+    left: 50px;
+    font-size: 1.6rem;
+  }
+
+  .learning-outcomes {
+    top: 20px;
+    right: 20px;
+    font-size: 1.6rem;
+  }
+
+  .about {
+    bottom: 25px;
+    left: 20px;
+    font-size: 1.6rem;
+  }
+
+  .contact {
+    bottom: 25px;
+    right: 20px;
+    font-size: 1.6rem;
+    
+  }
+
+
+/* Modal container */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 10; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Transparent blur */
+  background-color: rgba(255, 255, 255, 0.1); 
+  overflow: auto;
+  transition: 0.3s ease-in-out;
+}
+
+
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 45%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+
+}
+
+.modal-content h2{
+  font-size:2rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  font-size: 30px;
+  color: #333;
+  cursor: pointer;
+}
+
+.emails{
+  font-family: 'Playfair Display', serif;
+}
+.nav a {
+  text-decoration: none;
+  color: #834550;
+}
+
+.nav a:hover {
+  color: black;
+}

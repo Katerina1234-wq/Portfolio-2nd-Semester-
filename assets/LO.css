@@ -1,0 +1,122 @@
+@font-face{
+    font-family: 'Solare';
+    src:url(/fonts/solare/solare/SolareItalic-Black.otf) format('opentype')
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url('/pics/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.learning-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.title {
+    font-size: 40px;
+    color: #5e2b42;
+    margin-bottom: 60px;
+    font-family: 'Solare';
+    font-style: italic;
+}
+
+.outcomes-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.outcome {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width: 200px;
+    height: 300px; 
+    border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+    text-decoration: none;
+    padding: 15px;
+    color: #481441;
+    font-weight: bold;
+    font-size: 15px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.outcome:hover {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+
+.bottom-right-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #a54caf;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .bottom-right-button:hover {
+    background-color: #cc6eb1;
+  }
+
+
+
+/* Falling Flowers Animation */
+  .falling-flowers { /* flowers sizes and format */
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 200%;
+    height: 100%;
+    z-index: 10;
+    overflow: hidden;
+}
+.falling-flowers .flower {
+    position: absolute; /* format and appearance of the flowers,  animation */
+    top: -100px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.9;
+    animation: fall 10s linear infinite;
+    animation-delay: calc(var(--i) * -6s);
+    left: calc(10% * var(--i));
+}
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0.9;  /*--movement of the flower-*/
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+
+
+
